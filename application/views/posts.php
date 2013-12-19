@@ -1,3 +1,17 @@
+<?php
+	$segment = 1;
+	$total = $this->uri->total_segments();
+        $base = substr(base_url(), 0, -1);
+	echo '<ol class="breadcrumb"><li><a href="'.base_url().'">home</a></li>';
+?>
+
+<?php while ($segment <= $total) : ?>
+    <?php echo '<li><a href="'.$base.'/'.$this->uri->segment($segment).'">'.$this->uri->segment($segment).'</a></li>'; ?>
+    <?php $base = $base.'/'.$this->uri->segment($segment); ?>
+    <?php $segment++; ?>
+<?php endwhile; ?>
+<?php echo '</ol>'; ?>
+
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <?php if ($post) : ?>
@@ -33,7 +47,7 @@
                             <span class="small under-categories label label-info">
                                 <span class="category-titles">Categories :</span>
                                 <?php foreach ($cats as $cat) : ?>
-                                <a href="#<?= $cat->category_id ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
+                                <a href="<?=  base_url('web/categories/'.$cat->category_id) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
                                 <?php endforeach; ?>
                             </span><br />
                         <?php endif; ?>
@@ -51,7 +65,7 @@
                             <span class="small with-tags label label-info">
                                 <span class="category-titles">Tags :</span>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <a href="#<?= $tag->tag_id ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
+                                    <a href="<?=  base_url('web/tags/'.$tag->tag_id) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
                                 <?php endforeach; ?>   
                             </span>
                         <?php endif; ?>

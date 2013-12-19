@@ -10,30 +10,31 @@
     <?php $base = $base.'/'.$this->uri->segment($segment); ?>
     <?php $segment++; ?>
 <?php endwhile; ?>
-<?php echo '</ol>'; ?>
+<?php echo '<li>'. Tag::find($this->uri->segment(3))->title.'</li></ol>'; ?>
 
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <?php if ($post) : ?>
+            <div class="well"><h4><small>Search for archive :</small> <?php echo Tag::find($this->uri->segment(3))->title; ?> </h4></div>
             <!-- Posting Loops -->
             <div class="posting">
                 <div class="panel panel-default post">
 
                     <?php if ($post->image_feature) : ?>
                         <div class="panel-heading" style="overflow: hidden; height: 300px;">
-                            <img class="img-post-feature" src="assets/images/prog-lang.jpg" width="100%" />
+                            <img class="img-post-feature" src="<?= base_url() ?><?= 'uploads/' . $post->image_feature ?>" width="100%" />
                         </div>
                     <?php endif; ?>
 
 
                     <div class="panel-body">
-                        <a href="#"><h2 class="lead"><?= $post->title ?></h2></a>
+                        <a href="<?= base_url('web/articles/' . $post->id . '/' . url_title($post->title, '-', TRUE)) ?>"><h2 class="lead"><?= $post->title ?></h2></a>
 
                         <div class="post-content">
-                            <?= $post->content ?>
+                            <?= word_limiter($post->content, 60) ?>
                         </div>
                         <br />
-
+                        <div class="pull-right"><a href="<?= base_url('web/articles/' . $post->id . '/' . url_title($post->title, '-', TRUE)) ?>" class="btn btn-default read-more">Read more</a></div>
 
                         <span class="label label-default">Published November 20, 2010 by Ahmad Awdiyanto </span>
                         <br />
@@ -47,13 +48,13 @@
                             <span class="small under-categories label label-info">
                                 <span class="category-titles">Categories :</span>
                                 <?php foreach ($cats as $cat) : ?>
-                                <a href="#<?= $cat->category_id ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
+                                    <a href="<?= base_url('web/categories/' . $cat->category_id) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
                                 <?php endforeach; ?>
                             </span><br />
                         <?php endif; ?>
 
 
-                        
+
 
 
 
@@ -65,7 +66,7 @@
                             <span class="small with-tags label label-info">
                                 <span class="category-titles">Tags :</span>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <a href="#<?= $tag->tag_id ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
+                                    <a href="<?= base_url('web/tags/' . $tag->tag_id) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
                                 <?php endforeach; ?>   
                             </span>
                         <?php endif; ?>

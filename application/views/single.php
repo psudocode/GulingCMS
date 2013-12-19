@@ -1,3 +1,17 @@
+<?php
+	$segment = 1;
+	$total = $this->uri->total_segments();
+        $base = substr(base_url(), 0, -1);
+	echo '<ol class="breadcrumb"><li><a href="'.base_url().'">home</a></li>';
+?>
+
+<?php while ($segment <= $total) : ?>
+    <?php echo '<li><a href="'.$base.'/'.$this->uri->segment($segment).'">'.$this->uri->segment($segment).'</a></li>'; ?>
+    <?php $base = $base.'/'.$this->uri->segment($segment); ?>
+    <?php $segment++; ?>
+<?php endwhile; ?>
+<?php echo '</ol>'; ?>
+
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <?php if ($post) : ?>
