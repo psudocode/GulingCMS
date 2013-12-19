@@ -1,0 +1,145 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 17, 2013, 4:16:21 PM
+    Author     : ahmad.awdiyanto
+*/
+@import url(http://fonts.googleapis.com/css?family=Crete+Round);
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
+body { 
+    background: url(../images/grass_bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 80px;
+}
+.navbar-brand {
+    font-family: 'Crete Round', serif;
+    font-size: 30px;
+    padding: 0;
+}
+.navbar, .navbar .dropdown-menu {
+    font-size: 17px;
+    font-family: 'Varela Round', sans-serif;
+}
+.panel-footer, .panel.post .lead {
+    font-family: 'Crete Round', serif;
+}
+.navbar .dropdown-menu::after {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  border-left: 6px solid transparent;
+  content: '';
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: rgb(153, 153, 153);
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s; /* Safari */
+}
+
+.dropdown-menu > li > a::after {
+    content: ">";
+    position: absolute;
+    right: 10px;
+    padding-right: 5px;
+    
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: bold; 
+    line-height: 1;
+    
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s; /* Safari */
+}
+.dropdown-menu > li > a:hover::after {
+    position: absolute;
+    right: 10px;
+    padding-right: 0;
+    font-weight: bold;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 0px;
+    overflow: hidden;
+    background-color: rgb(153, 153, 153);
+}
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0px;
+    border-radius: 0px;
+}
+.navbar-nav > li > a {
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+.dropdown-menu > li > a {
+    padding: 6px 35px 6px 20px;
+}
+.panel.post {
+    border: none;
+}
+.panel.post .label a {
+    color: orangered;
+}
+.panel.post .panel-footer {
+    font-size: 20px;
+    padding: 0;
+}
+.panel.post .panel-footer .panfoot{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.panel.post .panel-footer .panfoot:not(:first-child) {
+
+}
+.sidebar .panel-heading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+img.graphoto {
+    border-radius: 32px;
+    border: 1px solid black;
+    float: left;
+}
+.graphoto::after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid black;
+  border-left: 6px solid transparent;
+  content: '';
+}
+.post-writer {
+    float: left;
+    padding-left: 15px;
+    padding-top: 8px;
+}
+.ket-kecil {
+    font-size: 15px;
+}
+.panel.post .panel-heading {
+    padding: 0;
+    margin: 0;
+}
+.footer {
+    background-color: white;
+}
+.footer-text {
+    padding-top: 10px;
+    padding-bottom: 20px
+}
