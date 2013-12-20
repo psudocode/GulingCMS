@@ -87,6 +87,6 @@ class Web extends CI_Controller {
             $this->theme->view('errors', $data);
 	}
 }
-
+//test
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
