@@ -41,14 +41,20 @@
         <script src="js/morris/chart-data-morris.js"></script>
         <script src="js/tablesorter/jquery.tablesorter.js"></script>
         <script src="js/tablesorter/tables.js"></script>
-        
+
         <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript">
-        tinymce.init({
-            selector: "textarea.tiny"
-         });
+            tinymce.init({
+                selector: "textarea.tiny"
+            });
         </script>
 
+        <script>
+            $(document).on('submit', '#form-post', function() {
+                tinymce.get('contents').triggerSave();
+                // $('#contents').val(tinymce.get('contents').save());
+            });
 
+        </script>   
     </body>
 </html>
