@@ -1,21 +1,21 @@
 <?php
-	$segment = 1;
-	$total = $this->uri->total_segments();
-        $base = substr(base_url(), 0, -1);
-	echo '<ol class="breadcrumb"><li><a href="'.base_url().'">home</a></li>';
+$segment = 1;
+$total = $this->uri->total_segments();
+$base = substr(base_url(), 0, -1);
+echo '<ol class="breadcrumb"><li><a href="' . base_url() . '">home</a></li>';
 ?>
 
 <?php while ($segment <= $total) : ?>
-    <?php echo '<li><a href="'.$base.'/'.$this->uri->segment($segment).'">'.$this->uri->segment($segment).'</a></li>'; ?>
-    <?php $base = $base.'/'.$this->uri->segment($segment); ?>
+    <?php echo '<li><a href="' . $base . '/' . $this->uri->segment($segment) . '">' . $this->uri->segment($segment) . '</a></li>'; ?>
+    <?php $base = $base . '/' . $this->uri->segment($segment); ?>
     <?php $segment++; ?>
 <?php endwhile; ?>
-<?php echo '<li>'. Tag::find($this->uri->segment(3))->title.'</li></ol>'; ?>
+<?php echo '<li>' . Tag::find($this->uri->segment(3))->title . '</li></ol>'; ?>
 
+<div class="well"><h4><small>Search for archive :</small> <?php echo Tag::find($this->uri->segment(3))->title; ?> </h4></div>
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <?php if ($post) : ?>
-            <div class="well"><h4><small>Search for archive :</small> <?php echo Tag::find($this->uri->segment(3))->title; ?> </h4></div>
             <!-- Posting Loops -->
             <div class="posting">
                 <div class="panel panel-default post">
