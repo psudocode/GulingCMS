@@ -13,5 +13,27 @@ class Admin extends CI_Controller {
     public function index() {
         $this->theme->view('welcome_message');
     }
+    public function posts() {
+        $this->theme->view('admin/posts');
+    }
+    public function pages() {
+        $this->theme->view('welcome_message');
+    }
+    public function categories() {
+        $this->theme->view('welcome_message');
+    }
+    public function displays() {
+        $this->theme->view('welcome_message');
+    }
+    public function settings() {
+        $this->theme->view('welcome_message');
+    }
+    public function faq() {
+        $this->theme->view('welcome_message');
+    }
+    public function about() {
+        $this->theme->view('welcome_message');
+    }
+    
 
 }
