@@ -31,7 +31,7 @@
         </div>
         <?php echo $this->partial('partial/footer'); ?> 
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins a) -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
