@@ -26,16 +26,10 @@
                 </div>
             </div>
             <div class="col-lg-4" >
-
-                    <div class="panel panel-default sidebar">
-                        <div class="panel-heading">our sponsors</div>
-                        <div class="panel-body">
-                            ini sponsor ceritanya
-                        </div>
-                    </div>
+                    <?php echo $this->partial('partial/sidebar'); ?> 
             </div>
         </div>
-
+        <?php echo $this->partial('partial/footer'); ?> 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>
