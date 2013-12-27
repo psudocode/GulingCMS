@@ -10,9 +10,9 @@ echo '<ol class="breadcrumb"><li><a href="' . base_url() . '">home</a></li>';
     <?php $base = $base . '/' . $this->uri->segment($segment); ?>
     <?php $segment++; ?>
 <?php endwhile; ?>
-<?php echo '<li>' . Tag::find($this->uri->segment(3))->title . '</li></ol>'; ?>
+<?php echo '</ol>'; ?>
 
-<div class="well"><h4><small>Search for archive :</small> <?php echo Tag::find($this->uri->segment(3))->title; ?> </h4></div>
+<div class="well"><h4><small>Search for archive :</small> <?php echo Tag::first(array('slug' =>$this->uri->segment(3)))->title; ?> </h4></div>
 <?php if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <?php if ($post) : ?>
@@ -48,13 +48,13 @@ echo '<ol class="breadcrumb"><li><a href="' . base_url() . '">home</a></li>';
                             <span class="small under-categories label label-info">
                                 <span class="category-titles">Categories :</span>
                                 <?php foreach ($cats as $cat) : ?>
-                                    <a href="<?= base_url('web/categories/' . $cat->category_id) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
+                                <a href="<?=  base_url('web/categories/'.Category::find($cat->category_id)->slug) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
                                 <?php endforeach; ?>
                             </span><br />
                         <?php endif; ?>
 
 
-
+                        
 
 
 
@@ -66,7 +66,7 @@ echo '<ol class="breadcrumb"><li><a href="' . base_url() . '">home</a></li>';
                             <span class="small with-tags label label-info">
                                 <span class="category-titles">Tags :</span>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <a href="<?= base_url('web/tags/' . $tag->tag_id) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
+                                    <a href="<?=  base_url('web/tags/'.Tag::find($tag->tag_id)->slug) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
                                 <?php endforeach; ?>   
                             </span>
                         <?php endif; ?>

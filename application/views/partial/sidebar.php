@@ -7,7 +7,7 @@
 
             foreach ($cats as $cat) {
                 echo '<li class="list-group-item">';
-                echo anchor('web/categories/' . $cat->id, $cat->title);
+                echo anchor('web/categories/' . $cat->slug, $cat->title);
                 echo '<span class="badge">';
                 
                 echo Post_to_category::count(array('category_id' => $cat->id));

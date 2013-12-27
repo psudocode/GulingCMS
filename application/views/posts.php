@@ -47,7 +47,7 @@
                             <span class="small under-categories label label-info">
                                 <span class="category-titles">Categories :</span>
                                 <?php foreach ($cats as $cat) : ?>
-                                <a href="<?=  base_url('web/categories/'.$cat->category_id) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
+                                <a href="<?=  base_url('web/categories/'.Category::find($cat->category_id)->slug) ?>"><?php echo Category::find($cat->category_id)->title; ?></a> 
                                 <?php endforeach; ?>
                             </span><br />
                         <?php endif; ?>
@@ -65,7 +65,7 @@
                             <span class="small with-tags label label-info">
                                 <span class="category-titles">Tags :</span>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <a href="<?=  base_url('web/tags/'.$tag->tag_id) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
+                                    <a href="<?=  base_url('web/tags/'.Tag::find($tag->tag_id)->slug) ?>"><?php echo Tag::find($tag->tag_id)->title; ?></a> 
                                 <?php endforeach; ?>   
                             </span>
                         <?php endif; ?>

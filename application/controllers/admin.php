@@ -36,6 +36,7 @@ class Admin extends CI_Controller {
                 if (!Category::find_by_title(trim($caty))) {
                     $cat = new Category();
                     $cat->title = trim($caty);
+                    $cat->slug = url_title($cat->title, '-', TRUE);
                     $cat->save();
                 } else {
                     $cat = Category::find_by_title(trim($caty));
@@ -57,6 +58,7 @@ class Admin extends CI_Controller {
                 if (!Tag::find_by_title(trim($tagy))) {
                     $tag = new Tag();
                     $tag->title = trim($tagy);
+                    $tag->slug = url_title($tag->title, '-', TRUE);
                     $tag->save();
                 } else {
                     $tag = Tag::find_by_title(trim($tagy));
@@ -108,6 +110,7 @@ class Admin extends CI_Controller {
                 if (!Category::find_by_title(trim($caty))) {
                     $cat = new Category();
                     $cat->title = trim($caty);
+                    $cat->slug = url_title($cat->title, '-', TRUE);
                     $cat->save();
                 } else {
                     $cat = Category::find_by_title(trim($caty));
@@ -129,6 +132,7 @@ class Admin extends CI_Controller {
                 if (!Tag::find_by_title(trim($tagy))) {
                     $tag = new Tag();
                     $tag->title = trim($tagy);
+                    $tag->slug = url_title($tag->title, '-', TRUE);
                     $tag->save();
                 } else {
                     $tag = Tag::find_by_title(trim($tagy));
