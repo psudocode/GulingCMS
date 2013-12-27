@@ -16,7 +16,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php foreach($navs as $nav) : ?>
-                        <li><a href="<?=  base_url('web/pages/'.$nav->id.'/'.url_title($nav->title, '-', TRUE)) ?>"><?=$nav->title?></a></li>
+                        <li><a href="<?=  base_url('web/pages/'.$nav->slug) ?>"><?=$nav->title?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

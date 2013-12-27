@@ -27,13 +27,13 @@
 
 
                     <div class="panel-body">
-                        <a href="<?=  base_url('web/articles/'.$post->id.'/'.url_title($post->title, '-', TRUE)) ?>"><h2 class="lead"><?= $post->title ?></h2></a>
+                        <a href="<?=  base_url('web/articles/'.$post->slug) ?>"><h2 class="lead"><?= $post->title ?></h2></a>
 
                         <div class="post-content">
                             <?= word_limiter($post->content, 60) ?>
                         </div>
                         <br />
-                        <div class="pull-right"><a href="<?=  base_url('web/articles/'.$post->id.'/'.url_title($post->title, '-', TRUE)) ?>" class="btn btn-default read-more">Read more</a></div>
+                        <div class="pull-right"><a href="<?=  base_url('web/articles/'.$post->slug) ?>" class="btn btn-default read-more">Read more</a></div>
 
                         <span class="label label-default">Published November 20, 2010 by Ahmad Awdiyanto </span>
                         <br />

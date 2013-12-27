@@ -18,12 +18,12 @@ class Web extends CI_Controller {
             
             $this->theme->view('posts', $data);
 	}
-	public function articles($id, $title  = NULL)
+	public function articles($slug  = NULL)
 	{
-            if(!$id){
+            if(!$slug){
                 redirect('web');
             }
-            $data['posts'] = Post::all(array('id' => $id, 'post_status' => 'active'));
+            $data['posts'] = Post::all(array('slug' => $slug, 'post_status' => 'active'));
             $data['navs'] = Post::all(array('post_type' => 'page'));
             
             if(!$data['posts']){
@@ -33,12 +33,12 @@ class Web extends CI_Controller {
             
             $this->theme->view('single', $data);
 	}
-	public function pages($id, $title = NULL)
+	public function pages($slug = NULL)
 	{
-            if(!$id){
+            if(!$slug){
                 redirect('web');
             }
-            $data['posts'] = Post::all(array('id' => $id, 'post_status' => 'active'));
+            $data['posts'] = Post::all(array('slug' => $slug, 'post_status' => 'active'));
             $data['navs'] = Post::all(array('post_type' => 'page'));
             
             if(!$data['posts']){

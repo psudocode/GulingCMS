@@ -20,6 +20,7 @@ class Admin extends CI_Controller {
     public function add_post() {
         $post = new Post();
         $post->title = $this->input->post('title-post');
+        $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
         $post->created_at = now();
         $post->created_by = $this->session->userdata('user_id');
@@ -32,13 +33,12 @@ class Admin extends CI_Controller {
         if ($this->input->post('categories')) {
             $cats = explode(",", $this->input->post('categories'));
             foreach ($cats as $caty) {
-                
-                if (!Category::find_by_title($caty)) {
+                if (!Category::find_by_title(trim($caty))) {
                     $cat = new Category();
                     $cat->title = trim($caty);
                     $cat->save();
                 } else {
-                    $cat = Category::find_by_title($caty);
+                    $cat = Category::find_by_title(trim($caty));
                 }
                 
                 if (!Post_to_category::find('all', array('post_id' => $post->id, 'category_id' => $cat->id))) {
@@ -54,12 +54,12 @@ class Admin extends CI_Controller {
             $tags = explode(",", $this->input->post('tags'));
             foreach ($tags as $tagy) {
                 
-                if (!Tag::find_by_title($tagy)) {
+                if (!Tag::find_by_title(trim($tagy))) {
                     $tag = new Tag();
                     $tag->title = trim($tagy);
                     $tag->save();
                 } else {
-                    $tag = Tag::find_by_title($tagy);
+                    $tag = Tag::find_by_title(trim($tagy));
                 }
                 if (!Post_to_tag::find('all', array('post_id' => $post->id, 'tag_id' => $tag->id))) {
                     $ptc = new Post_to_tag();
@@ -77,11 +77,8 @@ class Admin extends CI_Controller {
         $post = Post::find($id);
         $post->delete();
 
-        $tag = Post_to_tag::find_by_post_id($id);
-        $tag->delete();
-
-        $cat = Post_to_category::find_by_post_id($id);
-        $cat->delete();
+        Post_to_tag::delete_all(array('conditions' => array('post_id' => $id)));
+        Post_to_category::delete_all(array('conditions' => array('post_id' => $id)));
 
         $this->session->set_flashdata('info', 'The post #' . $id . ' has been deleted');
         redirect('admin/posts');
@@ -95,6 +92,7 @@ class Admin extends CI_Controller {
     public function update_post($id) {
         $post = Post::find($id);
         $post->title = $this->input->post('title-post');
+        $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
         $post->updated_at = now();
         $post->updated_by = $this->session->userdata('user_id');
@@ -107,12 +105,12 @@ class Admin extends CI_Controller {
             $cats = explode(",", $this->input->post('categories'));
             foreach ($cats as $caty) {
                 
-                if (!Category::find_by_title($caty)) {
+                if (!Category::find_by_title(trim($caty))) {
                     $cat = new Category();
                     $cat->title = trim($caty);
                     $cat->save();
                 } else {
-                    $cat = Category::find_by_title($caty);
+                    $cat = Category::find_by_title(trim($caty));
                 }
                 
                 if (!Post_to_category::find('all', array('post_id' => $post->id, 'category_id' => $cat->id))) {
@@ -128,12 +126,12 @@ class Admin extends CI_Controller {
             $tags = explode(",", $this->input->post('tags'));
             foreach ($tags as $tagy) {
                 
-                if (!Tag::find_by_title($tagy)) {
+                if (!Tag::find_by_title(trim($tagy))) {
                     $tag = new Tag();
                     $tag->title = trim($tagy);
                     $tag->save();
                 } else {
-                    $tag = Tag::find_by_title($tagy);
+                    $tag = Tag::find_by_title(trim($tagy));
                 }
                 if (!Post_to_tag::find('all', array('post_id' => $post->id, 'tag_id' => $tag->id))) {
                     $ptc = new Post_to_tag();
@@ -157,9 +155,142 @@ class Admin extends CI_Controller {
     }
 
     public function pages() {
-        $this->theme->view('welcome_message');
+        $data['posts'] = Post::all(array('post_type' => 'page'));
+        $this->theme->view('admin/pages', $data);
+    }
+    
+    public function form_pages() {
+        $this->theme->view('admin/form_pages');
+    }
+    
+    public function add_page() {
+        $post = new Post();
+        $post->title = $this->input->post('title-post');
+        $post->slug = url_title($post->title, '-', TRUE);
+        $post->content = $this->input->post('content');
+        $post->created_at = now();
+        $post->created_by = $this->session->userdata('user_id');
+        $post->image_feature = $this->input->post('images');
+        $post->post_type = 'page';
+        $post->flag_sticky = $this->input->post('sticky');
+        $post->save();
+
+
+        if ($this->input->post('categories')) {
+            $cats = explode(",", $this->input->post('categories'));
+            foreach ($cats as $caty) {
+                if (!Category::find_by_title(trim($caty))) {
+                    $cat = new Category();
+                    $cat->title = trim($caty);
+                    $cat->save();
+                } else {
+                    $cat = Category::find_by_title(trim($caty));
+                }
+                
+                if (!Post_to_category::find('all', array('post_id' => $post->id, 'category_id' => $cat->id))) {
+                    $ptc = new Post_to_category();
+                    $ptc->post_id = $post->id;
+                    $ptc->category_id = $cat->id;
+                    $ptc->save();
+                }
+            }
+        }
+
+        if ($this->input->post('tags')) {
+            $tags = explode(",", $this->input->post('tags'));
+            foreach ($tags as $tagy) {
+                
+                if (!Tag::find_by_title(trim($tagy))) {
+                    $tag = new Tag();
+                    $tag->title = trim($tagy);
+                    $tag->save();
+                } else {
+                    $tag = Tag::find_by_title(trim($tagy));
+                }
+                if (!Post_to_tag::find('all', array('post_id' => $post->id, 'tag_id' => $tag->id))) {
+                    $ptc = new Post_to_tag();
+                    $ptc->post_id = $post->id;
+                    $ptc->tag_id = $tag->id;
+                    $ptc->save();
+                }
+            }
+        }
+        $this->session->set_flashdata('info', 'The page #' . $post->id . ' has been created');
+        redirect('admin/pages');
     }
 
+    public function delete_page($id) {
+        $post = Post::find($id);
+        $post->delete();
+
+        Post_to_tag::delete_all(array('conditions' => array('post_id' => $id)));
+        Post_to_category::delete_all(array('conditions' => array('post_id' => $id)));
+
+        $this->session->set_flashdata('info', 'The page #' . $id . ' has been deleted');
+        redirect('admin/posts');
+    }
+
+    public function edit_page($id) {
+        $data['post'] = Post::find($id);
+        $this->theme->view('admin/form_edit_page', $data);
+    }
+
+    public function update_page($id) {
+        $post = Post::find($id);
+        $post->title = $this->input->post('title-post');
+        $post->slug = url_title($post->title, '-', TRUE);
+        $post->content = $this->input->post('content');
+        $post->updated_at = now();
+        $post->updated_by = $this->session->userdata('user_id');
+        $post->image_feature = $this->input->post('images');
+        $post->post_type = 'page';
+        $post->flag_sticky = $this->input->post('sticky');
+        $post->save();
+
+        if ($this->input->post('categories')) {
+            $cats = explode(",", $this->input->post('categories'));
+            foreach ($cats as $caty) {
+                
+                if (!Category::find_by_title(trim($caty))) {
+                    $cat = new Category();
+                    $cat->title = trim($caty);
+                    $cat->save();
+                } else {
+                    $cat = Category::find_by_title(trim($caty));
+                }
+                
+                if (!Post_to_category::find('all', array('post_id' => $post->id, 'category_id' => $cat->id))) {
+                    $ptc = new Post_to_category();
+                    $ptc->post_id = $post->id;
+                    $ptc->category_id = $cat->id;
+                    $ptc->save();
+                }
+            }
+        }
+
+        if ($this->input->post('tags')) {
+            $tags = explode(",", $this->input->post('tags'));
+            foreach ($tags as $tagy) {
+                
+                if (!Tag::find_by_title(trim($tagy))) {
+                    $tag = new Tag();
+                    $tag->title = trim($tagy);
+                    $tag->save();
+                } else {
+                    $tag = Tag::find_by_title(trim($tagy));
+                }
+                if (!Post_to_tag::find('all', array('post_id' => $post->id, 'tag_id' => $tag->id))) {
+                    $ptc = new Post_to_tag();
+                    $ptc->post_id = $post->id;
+                    $ptc->tag_id = $tag->id;
+                    $ptc->save();
+                }
+            }
+        }
+        $this->session->set_flashdata('info', 'The page #' . $id . ' has been updated');
+        redirect('admin/pages');
+    }
+    
     public function categories() {
         $this->theme->view('welcome_message');
     }
