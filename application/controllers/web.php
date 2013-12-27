@@ -8,7 +8,7 @@ class Web extends CI_Controller {
         }
 	public function index()
 	{
-            $data['posts'] = Post::all(array('post_type' => 'post'));
+            $data['posts'] = Post::find_by_sql("SELECT * FROM posts WHERE post_type = 'post' ORDER BY id DESC");
             $data['navs'] = Post::all(array('post_type' => 'page'));
             
             if(!$data['posts']){
@@ -47,12 +47,16 @@ class Web extends CI_Controller {
             
             $this->theme->view('page', $data);
 	}
-	public function categories($id)
+	public function categories($slug)
 	{
-            if(!$id){
+            if(!$slug){
                 redirect('web');
             }
-            $join = 'LEFT JOIN post_to_categories a ON(posts.id = a.post_id) WHERE category_id = '.$id;
+            // $join = 'LEFT JOIN post_to_categories a ON(posts.id = a.post_id) WHERE category_id = '.$id;
+            $join = " LEFT JOIN post_to_categories a "
+                    . "ON(posts.id = a.post_id) "
+                    . "WHERE a.category_id = ".Category::first(array('slug' => $slug))->id." "
+                    . "AND post_type = 'post' ORDER BY id DESC";
             $data['posts'] = Post::all(array('joins' => $join));
             $data['navs'] = Post::all(array('post_type' => 'page'));
             
@@ -63,12 +67,17 @@ class Web extends CI_Controller {
             
             $this->theme->view('categories', $data);
 	}
-	public function tags($id)
+	public function tags($slug)
 	{
-            if(!$id){
+            if(!$slug){
                 redirect('web');
             }
-            $join = 'LEFT JOIN post_to_tags a ON(posts.id = a.post_id) WHERE tag_id = '.$id.' AND post_status = "active"' ;
+            
+            // $join = 'LEFT JOIN post_to_tags a ON(posts.id = a.post_id) WHERE tag_id = '.$id.' AND post_status = "active"' ;
+            $join = " LEFT JOIN post_to_tags a "
+                    . "ON(posts.id = a.post_id) "
+                    . "WHERE a.tag_id = ".Tag::first(array('slug' => $slug))->id." "
+                    . "AND post_type = 'post' ORDER BY id DESC";
             $data['posts'] = Post::all(array('joins' => $join));
             $data['navs'] = Post::all(array('post_type' => 'page'));
             
