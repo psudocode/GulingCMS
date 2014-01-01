@@ -16,8 +16,9 @@
 
     <div class="row">
         <div class="col-lg-8">
-
-            <form role="form" method="post" id="form-post" action="<?= base_url('admin/add_post') ?>" >
+            
+        <?php if (isset($error)) { echo $error; }?>
+            <form role="form" method="post" id="form-post" enctype="multipart/form-data" action="<?= base_url('admin/add_post') ?>" >
 
                 <div class="form-group">
                     <label>Title Post</label>
@@ -31,7 +32,7 @@
                 
                 <div class="form-group">
                     <label>Images</label>
-                    <input name="images" class="form-control" placeholder="Enter Categories">
+                    <input type="file" name="images">
                 </div>
                 
                 <div class="form-group">

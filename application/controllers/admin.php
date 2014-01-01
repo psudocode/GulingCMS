@@ -18,13 +18,31 @@ class Admin extends CI_Controller {
     }
 
     public function add_post() {
+        
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']	= '1000';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('images'))
+        {
+                $error = array('error' => $this->upload->display_errors());
+        }
+        else
+        {
+                $data_file = array('upload_data' => $this->upload->data());
+        }
         $post = new Post();
         $post->title = $this->input->post('title-post');
         $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
+        if($data_file){
+            $post->image_feature = 'uploads/'.$data_file['upload_data']['file_name'];
+        }
         $post->created_at = now();
         $post->created_by = $this->session->userdata('user_id');
-        $post->image_feature = $this->input->post('images');
         $post->post_type = 'post';
         $post->flag_sticky = $this->input->post('sticky');
         $post->save();
@@ -71,7 +89,9 @@ class Admin extends CI_Controller {
                 }
             }
         }
-        $this->session->set_flashdata('info', 'The post #' . $post->id . ' has been created');
+        
+
+        $this->session->set_flashdata('info', 'The post #' . $post->id . ' has been created <br/> '.(isset($error) ? $error['error'] : ''));
         redirect('admin/posts');
     }
 
@@ -92,13 +112,31 @@ class Admin extends CI_Controller {
     }
 
     public function update_post($id) {
-        $post = Post::find($id);
+        
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']	= '1000';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('images'))
+        {
+                $error = array('error' => $this->upload->display_errors());
+        }
+        else
+        {
+                $data_file = array('upload_data' => $this->upload->data());
+        }
+        $post = new Post();
         $post->title = $this->input->post('title-post');
         $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
+        if($data_file){
+            $post->image_feature = 'uploads/'.$data_file['upload_data']['file_name'];
+        }
         $post->updated_at = now();
         $post->updated_by = $this->session->userdata('user_id');
-        $post->image_feature = $this->input->post('images');
         $post->post_type = 'post';
         $post->flag_sticky = $this->input->post('sticky');
         $post->save();
@@ -145,7 +183,8 @@ class Admin extends CI_Controller {
                 }
             }
         }
-        $this->session->set_flashdata('info', 'The post #' . $id . ' has been updated');
+
+        $this->session->set_flashdata('info', 'The post #' . $post->id . ' has been updated <br/> '.(isset($error) ? $error['error'] : ''));
         redirect('admin/posts');
     }
 
@@ -168,13 +207,31 @@ class Admin extends CI_Controller {
     }
     
     public function add_page() {
+        
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']	= '1000';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('images'))
+        {
+                $error = array('error' => $this->upload->display_errors());
+        }
+        else
+        {
+                $data_file = array('upload_data' => $this->upload->data());
+        }
         $post = new Post();
         $post->title = $this->input->post('title-post');
         $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
+        if($data_file){
+            $post->image_feature = 'uploads/'.$data_file['upload_data']['file_name'];
+        }
         $post->created_at = now();
         $post->created_by = $this->session->userdata('user_id');
-        $post->image_feature = $this->input->post('images');
         $post->post_type = 'page';
         $post->flag_sticky = $this->input->post('sticky');
         $post->save();
@@ -219,8 +276,9 @@ class Admin extends CI_Controller {
                 }
             }
         }
-        $this->session->set_flashdata('info', 'The page #' . $post->id . ' has been created');
-        redirect('admin/pages');
+
+        $this->session->set_flashdata('info', 'The page #' . $post->id . ' has been created <br/> '.(isset($error) ? $error['error'] : ''));
+        redirect('admin/posts');
     }
 
     public function delete_page($id) {
@@ -231,7 +289,7 @@ class Admin extends CI_Controller {
         Post_to_category::delete_all(array('conditions' => array('post_id' => $id)));
 
         $this->session->set_flashdata('info', 'The page #' . $id . ' has been deleted');
-        redirect('admin/posts');
+        redirect('admin/pages');
     }
 
     public function edit_page($id) {
@@ -240,13 +298,31 @@ class Admin extends CI_Controller {
     }
 
     public function update_page($id) {
-        $post = Post::find($id);
+        
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size']	= '1000';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        if ( ! $this->upload->do_upload('images'))
+        {
+                $error = array('error' => $this->upload->display_errors());
+        }
+        else
+        {
+                $data_file = array('upload_data' => $this->upload->data());
+        }
+        $post = new Post();
         $post->title = $this->input->post('title-post');
         $post->slug = url_title($post->title, '-', TRUE);
         $post->content = $this->input->post('content');
+        if($data_file){
+            $post->image_feature = 'uploads/'.$data_file['upload_data']['file_name'];
+        }
         $post->updated_at = now();
         $post->updated_by = $this->session->userdata('user_id');
-        $post->image_feature = $this->input->post('images');
         $post->post_type = 'page';
         $post->flag_sticky = $this->input->post('sticky');
         $post->save();
@@ -291,8 +367,9 @@ class Admin extends CI_Controller {
                 }
             }
         }
-        $this->session->set_flashdata('info', 'The page #' . $id . ' has been updated');
-        redirect('admin/pages');
+
+        $this->session->set_flashdata('info', 'The Page #' . $post->id . ' has been updated <br/> '.(isset($error) ? $error['error'] : ''));
+        redirect('admin/posts');
     }
     
     public function categories() {

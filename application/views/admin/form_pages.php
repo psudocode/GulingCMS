@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-lg-8">
-
+        <?php if (isset($error)) { echo $error; }?>
             <form role="form" method="post" id="form-post" action="<?= base_url('admin/add_page') ?>" >
 
                 <div class="form-group">
@@ -31,7 +31,7 @@
                 
                 <div class="form-group">
                     <label>Images</label>
-                    <input name="images" class="form-control" placeholder="Enter Categories">
+                    <input type="file" name="images">
                 </div>
                 
                 <div class="form-group">

@@ -22,7 +22,7 @@ echo '<ol class="breadcrumb"><li><a href="' . base_url() . '">home</a></li>';
 
                     <?php if ($post->image_feature) : ?>
                         <div class="panel-heading" style="overflow: hidden; height: 300px;">
-                            <img class="img-post-feature" src="<?= base_url() ?><?= 'uploads/' . $post->image_feature ?>" width="100%" />
+                            <img class="img-post-feature" src="<?=base_url()?><?=$post->image_feature?>" width="100%" />
                         </div>
                     <?php endif; ?>
 
