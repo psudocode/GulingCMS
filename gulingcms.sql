@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2013 at 11:41 AM
+-- Generation Time: Jan 02, 2014 at 07:43 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `slug` varchar(255) DEFAULT NULL,
   `desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `categories`
@@ -43,7 +43,8 @@ INSERT INTO `categories` (`id`, `title`, `slug`, `desc`) VALUES
 (2, 'JSP', 'jsp', 'JSP Proggraming Language'),
 (28, 'js', 'js', NULL),
 (29, 'mysql', 'mysql', NULL),
-(30, 'set', 'set', NULL);
+(30, 'set', 'set', NULL),
+(31, 'test', 'test', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `post_status` enum('inactive','active') DEFAULT 'active',
   `flag_sticky` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `posts`
@@ -113,7 +114,9 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `content`, `created_at`, `updated_at
 (29, 'PHP Language is awesome', 'php-language-is-awesome', '<p><strong>Lorem</strong> ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>', '2013-12-27 03:22:26', '2013-12-27 03:22:26', 1, NULL, '', 'post', 'active', 0),
 (30, 'PHP Language is awesome2', 'php-language-is-awesome2', '<p><strong>Lorem</strong> ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>', '2013-12-27 03:22:56', '2013-12-27 03:22:56', 1, NULL, '', 'post', 'active', 0),
 (31, 'About Me', 'about-me', '<p>aku adalah anak gembala, selalu riang serta <strong>gembira.</strong></p>', '2013-12-27 03:39:17', '2013-12-27 03:46:31', 1, 1, '', 'page', 'active', 0),
-(32, 'test', 'test', '<p>testst</p>', '2013-12-27 11:11:47', '2013-12-27 11:11:47', 1, NULL, '', 'post', 'active', 0);
+(32, 'test', 'test', '<p>testst</p>', '2013-12-27 11:11:47', '2013-12-27 11:11:47', 1, NULL, '', 'post', 'active', 0),
+(33, 'title', 'title', '<p>etst</p>', '2014-01-02 05:09:03', '2014-01-02 05:09:03', 1, NULL, NULL, 'post', 'active', 0),
+(34, 'PHP Language 34', 'php-language-34', '', '2014-01-02 05:09:47', '2014-01-02 05:09:47', 1, NULL, 'uploads/port_Bunda.jpg', 'post', 'active', 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `post_to_categories` (
   `post_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `post_to_categories`
@@ -141,7 +144,8 @@ INSERT INTO `post_to_categories` (`id`, `post_id`, `category_id`) VALUES
 (20, 30, 1),
 (21, 30, 28),
 (22, 30, 29),
-(23, 32, 30);
+(23, 32, 30),
+(24, 33, 31);
 
 -- --------------------------------------------------------
 
@@ -154,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `post_to_tags` (
   `post_id` int(11) DEFAULT NULL,
   `tag_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `post_to_tags`
@@ -170,7 +174,8 @@ INSERT INTO `post_to_tags` (`id`, `post_id`, `tag_id`) VALUES
 (31, 30, 42),
 (32, 30, 40),
 (33, 30, 41),
-(34, 32, 43);
+(34, 32, 43),
+(35, 33, 44);
 
 -- --------------------------------------------------------
 
@@ -184,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `slug` varchar(255) DEFAULT NULL,
   `desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `tags`
@@ -197,7 +202,8 @@ INSERT INTO `tags` (`id`, `title`, `slug`, `desc`) VALUES
 (40, 'Language', 'language', NULL),
 (41, 'Programming', 'programming', NULL),
 (42, 'PHP', 'php', NULL),
-(43, 'sett', 'sett', NULL);
+(43, 'sett', 'sett', NULL),
+(44, 'test', 'test', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '\0\0', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1388139085, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '\0\0', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1388635715, 1, 'Admin', 'istrator', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
