@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2014 at 07:43 AM
+-- Generation Time: Jan 02, 2014 at 12:40 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -45,6 +45,32 @@ INSERT INTO `categories` (`id`, `title`, `slug`, `desc`) VALUES
 (29, 'mysql', 'mysql', NULL),
 (30, 'set', 'set', NULL),
 (31, 'test', 'test', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `content` text,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `post_id`, `parent_id`, `username`, `email`, `url`, `content`, `status`, `created_at`) VALUES
+(1, 2, NULL, 'suryo', 'suryo@saputro.com', 'http://idtut.com', 'test komentar', 'active', '2014-01-02 14:11:30');
 
 -- --------------------------------------------------------
 
