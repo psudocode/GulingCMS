@@ -1,9 +1,23 @@
-<h1><?php echo lang('edit_user_heading');?></h1>
-<p><?php echo lang('edit_user_subheading');?></p>
+<div id="page-wrapper">
 
-<div id="infoMessage"><?php echo $message;?></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1><?php echo lang('edit_user_heading');?></h1>
+            <ol class="breadcrumb">
+                <li><p><?php echo lang('edit_user_subheading');?></p></li>
+            </ol>
+            <?php if ($this->session->flashdata('info')) : ?>
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <?= $this->session->flashdata('info') ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div><!-- /.row -->
 
-<?php echo form_open(uri_string());?>
+    <div class="row">
+        <div class="col-lg-8">
+            <?php echo form_open(uri_string());?>
 
       <p>
             <?php echo lang('edit_user_fname_label', 'first_name');?> <br />
@@ -57,6 +71,15 @@
       <?php echo form_hidden('id', $user->id);?>
       <?php echo form_hidden($csrf); ?>
 
-      <p><?php echo form_submit('submit', lang('edit_user_submit_btn'));?></p>
+      <p><?php echo form_submit(array('type' => 'submit','value' => 'Submit','class' => 'btn btn-primary')); ?></p>
 
 <?php echo form_close();?>
+
+        </div>
+        <div class="col-lg-4">
+            <p>For complete documentation, please visit <a href="http://getbootstrap.com/css/#forms">Bootstrap's Form Documentation</a>.</p>
+
+        </div>
+    </div><!-- /.row -->
+
+</div><!-- /#user-wrapper -->

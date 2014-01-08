@@ -8,7 +8,7 @@
         <li><a href="<?= base_url('admin/categories') ?>"><i class="fa fa-edit"></i> Categories</a></li>
         <li><a href="<?= base_url('admin/displays') ?>"><i class="fa fa-font"></i> Display</a></li>
         <li><a href="<?= base_url('admin/settings') ?>"><i class="fa fa-desktop"></i> Setting </a></li>
-        <li><a href="<?= base_url('admin/faq') ?>"><i class="fa fa-wrench"></i> FAQ</a></li>
+        <li><a href="<?= base_url('admin/users') ?>"><i class="fa fa-wrench"></i> Users</a></li>
         <li><a href="<?= base_url('admin/about') ?>"><i class="fa fa-file"></i> About</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right navbar-user">
@@ -62,11 +62,11 @@
         <li class="dropdown user-dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?=$this->session->userdata('username')?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="<?=base_url('auth/edit_profile')?>"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
                 <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                <li><a href="<?=base_url('auth/logout')?>"><i class="fa fa-power-off"></i> Log Out</a></li>
             </ul>
         </li>
     </ul>
